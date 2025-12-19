@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봇치 더 록!으로 배우는 일본 문화</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Permanent+Marker&display=swap');
+        
+        :root {
+            --bocchi-pink: #ff85a1;
+            --nijika-yellow: #ffda7b;
+            --ryo-blue: #7bc9ff;
+            --kita-red: #ff6b6b;
+            --dark-bg: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            display: inline-block;
+            font-weight: 900;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent;
+        }
+
+        .glitch:hover::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--ryo-blue);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            100% { clip: rect(48px, 9999px, 89px, 0); }
+        }
+
+        .staff-line {
+            background-image: repeating-linear-gradient(
+                transparent, transparent 19px, 
+                rgba(0,0,0,0.05) 19px, rgba(0,0,0,0.05) 20px
+            );
+            background-size: 100% 100px;
+        }
+
+        .live-performance-card {
+            background: #111;
+            color: white;
+            border: 2px solid #333;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        .live-performance-card:hover {
+            border-color: var(--bocchi-pink);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .shrine-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .shrine-card:hover {
+            border-color: var(--kita-red);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .festival-card {
+            background: white;
+            border: 3px solid black;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .tape {
+            width: 80px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px);
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            border: 1px solid rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .band-image-container {
+            position: relative;
+            border: 4px solid white;
+            box-shadow: 15px 15px 0px var(--bocchi-pink);
+        }
+
+        .social-image-frame {
+            border: 4px solid black;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .school-image-frame {
+            border: 3px solid black;
+            border-radius: 4px;
+            overflow: hidden;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0px black;
+            transition: transform 0.3s ease;
+        }
+        
+        .school-image-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+    </style>
+</head>
+<body class="text-gray-900 staff-line">
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b-2 border-black sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-black tracking-tighter italic">
+                    <span class="text-pink-500">BOCCHI</span><span class="text-black">CULTURE</span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-bold text-sm uppercase">
+                    <a href="#school" class="hover:text-yellow-500 transition">School</a>
+                    <a href="#shrine" class="hover:text-red-500 transition">Shrine</a>
+                    <a href="#honorifics" class="hover:text-pink-500 transition">Social</a>
+                    <a href="#band" class="hover:text-blue-500 transition">Band</a>
+                </div>
+                <button id="menu-btn" class="md:hidden text-2xl"><i class="fa-solid fa-bolt"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- School Culture Section -->
+    <section id="school" class="py-24 px-6 bg-yellow-50 border-b-4 border-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="bg-black text-white px-3 py-1 font-bold text-xs uppercase tracking-widest mb-4 inline-block">Special Event</span>
+                <h2 class="text-5xl md:text-7xl font-black italic mb-6 tracking-tighter">학원제: 청춘의 집대성</h2>
+            </div>
+
+            <!-- School Images Integration -->
+            <div class="grid md:grid-cols-2 gap-12 mb-20">
+                <div class="space-y-4">
+                    <div class="school-image-frame bg-white p-2">
+                        <img src="봇치 더 록! _ 11화_06_53.png" 
+                             alt="학원제 준비 장면" 
+                             class="w-full h-auto"
+                             onerror="this.src='https://via.placeholder.com/800x450?text=School+Festival+Preparation'">
+                    </div>
+                    <p class="text-xs font-bold italic text-gray-500 text-center uppercase tracking-widest">Moment: Preparation & Collaboration</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="school-image-frame bg-white p-2" style="transform: rotate(1deg);">
+                        <img src="봇치 더 록! _ 11화_07_06.png" 
+                             alt="학원제 당일 전경" 
+                             class="w-full h-auto"
+                             onerror="this.src='https://via.placeholder.com/800x450?text=School+Festival+Live'">
+                    </div>
+                    <p class="text-xs font-bold italic text-gray-500 text-center uppercase tracking-widest">Moment: The Big Day Performance</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="festival-card p-8">
+                    <div class="tape"></div>
+                    <h3 class="text-2xl font-black mb-4 italic">준비 기간</h3>
+                    <p class="text-gray-600 text-sm">방과 후 늦게까지 이어지는 준비와 교실 개조 활동. 학생들의 자발적인 참여가 핵심입니다.</p>
+                </div>
+                <div class="festival-card p-8">
+                    <div class="tape"></div>
+                    <h3 class="text-2xl font-black mb-4 italic">교실의 변신</h3>
+                    <p class="text-gray-600 text-sm">메이드 카페, 유령의 집 등 평소의 학습 공간이 창의적인 테마파크로 변모합니다.</p>
+                </div>
+                <div class="festival-card p-8">
+                    <div class="tape"></div>
+                    <h3 class="text-2xl font-black mb-4 italic">무대 공연</h3>
+                    <p class="text-gray-600 text-sm">체육관이나 야외 무대에서 펼쳐지는 밴드부와 댄스부의 열정적인 라이브 공연.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shrine Section -->
+    <section id="shrine" class="py-24 px-6 bg-white border-b-4 border-black relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-16 items-start mb-24">
+                <div class="lg:w-1/2">
+                    <span class="text-red-500 font-black uppercase tracking-widest text-sm italic">Tradition & Belief</span>
+                    <h2 class="text-5xl md:text-7xl font-black mb-8 leading-tight tracking-tighter italic">신사: <span class="text-red-500">기원의 공간</span></h2>
+                    <p class="text-xl text-gray-600 leading-relaxed mb-8 font-medium">
+                        새해 첫 참배(하츠모우데)부터 소중한 소망을 비는 순간까지, 일본인들의 삶 깊숙이 자리 잡은 신사의 문화를 알아봅니다.
+                    </p>
+                    
+                    <div class="mb-8 relative group">
+                        <img src="https://i.namu.wiki/i/xOVxlknIoEFBI3p4-kLIupMjoRrXsBJAm9iL9qXTeAEJzHqaalxTrvbZghfxy18gUvW5FWXzcIwxZXXM_Av-twjzHVmOh74oNTdao-bD7TJgY9V4mHs645qwHl1TWmUrGs7J-aNdPvR4P_z2vUC0TA.webp" 
+                             alt="에노시마 신사 전경" 
+                             class="w-full h-auto border-2 border-black rounded shadow-[8px_8px_0px_0px_rgba(255,107,107,1)] grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
+                             onerror="this.src='https://via.placeholder.com/600x400?text=Shrine+Image+Fallback'">
+                        <p class="mt-3 text-xs text-gray-400 italic font-bold uppercase tracking-widest text-center">Visual: Enoshima Shrine Entrance</p>
+                    </div>
+
+                    <div class="p-6 bg-red-50 border-l-4 border-red-500 italic text-sm text-red-800">
+                        "작중 에노시마 신사를 방문한 결속 밴드 멤버들처럼, 많은 일본인들은 중요한 일을 앞두고 신사를 찾아 성공을 기원합니다."
+                    </div>
+                </div>
+                <div class="lg:w-1/2 grid grid-cols-2 gap-4">
+                    <div class="shrine-card p-6">
+                        <div class="text-red-500 text-3xl mb-4"><i class="fa-solid fa-water"></i></div>
+                        <h4 class="font-black mb-2 text-lg">테미즈야 (手水舎)</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">참배 전 손과 입을 씻어 몸과 마음을 정갈하게 하는 정화의 장소입니다.</p>
+                    </div>
+                    <div class="shrine-card p-6">
+                        <div class="text-red-500 text-3xl mb-4"><i class="fa-solid fa-bell"></i></div>
+                        <h4 class="font-black mb-2 text-lg">참배 에티켓</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">'2례 2박수 1례'가 기본. 두 번 절하고 두 번 손뼉을 친 뒤 한 번 더 절합니다.</p>
+                    </div>
+                    <div class="shrine-card p-6">
+                        <div class="text-red-500 text-3xl mb-4"><i class="fa-solid fa-scroll"></i></div>
+                        <h4 class="font-black mb-2 text-lg">오미쿠지 (御神籤)</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">운세를 점치는 종이 뽑기. 흉(凶)이 나오면 신사의 나무나 줄에 묶어 액운을 막습니다.</p>
+                    </div>
+                    <div class="shrine-card p-6">
+                        <div class="text-red-500 text-3xl mb-4"><i class="fa-solid fa-shield-heart"></i></div>
+                        <h4 class="font-black mb-2 text-lg">오마모리 (御守)</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">액막이와 소원 성취를 위해 지니고 다니는 부적. 학업, 건강, 결연 등 종류가 다양합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative py-12 px-8 bg-gray-50 border-2 border-black/5 rounded-2xl overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 text-[20rem] text-red-100 opacity-20 rotate-12">
+                    <i class="fa-solid fa-torii-gate"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl">
+                    <h4 class="text-2xl font-black mb-4">에마 (絵馬) 에 담긴 간절함</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        나무판에 소원을 적어 신사에 걸어두는 '에마'. 사람들은 이곳에 자신의 꿈이나 합격 기원 등을 남깁니다. 
+                        수많은 에마가 걸린 풍경은 그 자체로 거대한 소망의 집합체가 됩니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Honorifics (Social) Section -->
+    <section id="honorifics" class="py-24 px-6 bg-pink-50 border-b-4 border-black">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-16 tracking-tight italic text-center uppercase">Social Distance & Respect</h2>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12 mb-16">
+                <!-- Social Section Image (Local Path) -->
+                <div class="lg:w-1/2">
+                    <div class="social-image-frame">
+                        <img src="봇치 더 록! _ 5화_07_53.png" 
+                             alt="결속 밴드 멤버들의 대화 장면" 
+                             class="w-full h-auto"
+                             onerror="this.src='https://via.placeholder.com/800x450?text=Social+Interaction+Scene'">
+                    </div>
+                    <p class="mt-4 text-xs text-center text-gray-500 font-bold italic tracking-wider uppercase">
+                        Reference: Conversation Dynamics in Kessoku Band
+                    </p>
+                </div>
+                
+                <div class="lg:w-1/2 space-y-6">
+                    <h3 class="text-3xl font-black italic">상대와의 거리를 결정하는 '말'</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        일본의 사회 구조에서 호칭은 단순히 이름을 부르는 것 이상의 의미를 가집니다. 상대방과의 심리적 거리, 예의, 그리고 친밀도를 단 한 단어의 접미사로 표현할 수 있습니다. 
+                        결속 밴드 멤버들 사이에서도 이 호칭의 변화는 관계의 발전을 보여주는 중요한 장치입니다.
+                    </p>
+                    <div class="p-6 bg-white border-2 border-black rounded-lg italic text-sm shadow-sm">
+                        "친해지기 전에는 성(姓)에 '-상'을 붙여 부르지만, 마음을 열게 되면 이름으로 부르거나 별명을 사용하며 '요비스테(호칭 생략)'를 하기도 합니다."
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 border-2 border-black hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] transition-all">
+                    <h3 class="text-xl font-bold mb-4 uppercase">1. 성(姓)과 예의</h3>
+                    <p class="text-gray-600 text-sm">초면이거나 공적인 관계에서 사용되는 가장 기본적인 사회적 방어선입니다.</p>
+                </div>
+                <div class="bg-white p-8 border-2 border-black hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] transition-all">
+                    <h3 class="text-xl font-bold mb-4 uppercase">2. 상 vs 짱</h3>
+                    <p class="text-gray-600 text-sm">보편적인 '-상'과 귀엽고 친근한 표현인 '-짱'. 성별과 연령에 따른 미묘한 뉘앙스 차이가 존재합니다.</p>
+                </div>
+                <div class="bg-white p-8 border-2 border-black hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] transition-all">
+                    <h3 class="text-xl font-bold mb-4 uppercase">3. 요비스테</h3>
+                    <p class="text-gray-600 text-sm">호칭 생략은 '우리는 이제 격식이 필요 없는 사이'라는 강력한 신뢰의 증표입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Band Culture Section: FOCUSED ON LIVE PERFORMANCE -->
+    <section id="band" class="py-24 px-6 bg-black text-white border-b-4 border-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="mb-16 text-center">
+                <span class="text-pink-500 font-black uppercase tracking-widest text-sm italic">The Stage Experience</span>
+                <h2 class="text-5xl md:text-7xl font-black italic mt-4 tracking-tighter">
+                    라이브: <span class="text-pink-500">전율의 순간</span>
+                </h2>
+                <p class="mt-6 text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                    조명이 꺼지고 앰프의 화이트 노이즈가 흐르는 긴장의 순간. 라이브 하우스 안에서만 느낄 수 있는 압도적인 공연의 에너지를 소개합니다.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-12 mb-16">
+                <div class="md:w-1/2">
+                    <div class="band-image-container">
+                        <img src="https://www.lyrical-nonsense.com/wp-content/uploads/2023/01/Bocchi-the-Rock-VOLUME-5-Temp.jpg" 
+                             alt="결속 밴드 비주얼" 
+                             class="w-full h-auto"
+                             onerror="this.src='https://via.placeholder.com/800x1100?text=Bocchi+The+Rock+Art'">
+                        <div class="absolute bottom-4 left-4 bg-black/80 px-4 py-2 text-xs font-black italic tracking-widest border border-pink-500">
+                            OFFICIAL ART: KESSOKU BAND
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 space-y-6">
+                    <h3 class="text-3xl font-black italic text-pink-500">ROCK NEVER DIES</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        라이브 하우스의 스테이지는 단순한 공연 공간 이상의 의미를 가집니다. 각기 다른 개성을 가진 멤버들이 하나의 사운드를 만들어내는 기적, 그리고 그 사운드가 관객에게 닿아 하나가 되는 경험이야말로 밴드 문화의 정수입니다.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="border-l-4 border-pink-500 pl-4 py-2">
+                            <span class="block text-2xl font-black italic">120dB</span>
+                            <span class="text-xs text-gray-500 uppercase font-bold">Sound Pressure</span>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4 py-2">
+                            <span class="block text-2xl font-black italic">60MIN</span>
+                            <span class="text-xs text-gray-500 uppercase font-bold">Pure Energy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- 1. Sound Pressure -->
+                <div class="live-performance-card p-8 rounded-lg">
+                    <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-volume-high text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 italic uppercase">압도적인 음압</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        이어폰으로는 결코 느낄 수 없는 가슴을 울리는 베이스 소리와 고막을 때리는 드럼 비트. 라이브 하우스 특유의 밀폐된 공간은 관객을 소리의 파도 속에 가둡니다.
+                    </p>
+                </div>
+
+                <!-- 2. Interaction -->
+                <div class="live-performance-card p-8 rounded-lg">
+                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-hands-clapping text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 italic uppercase">무대와의 호흡</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        연주자와 관객의 거리가 불과 수 미터. 아티스트의 땀방울과 숨소리까지 공유하며, 관객의 환호에 따라 즉흥적으로 변하는 공연의 온도를 직접 체감할 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- 3. Visuals -->
+                <div class="live-performance-card p-8 rounded-lg">
+                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-lightbulb text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4 italic uppercase">강렬한 조명 연출</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        곡의 분위기에 맞춰 격렬하게 점멸하는 화려한 조명 연출. 어두운 공간 속에서 오직 무대 위만이 존재하는 듯한 몰입감은 현실의 고민을 잊게 만듭니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-20 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="text-5xl font-black italic mb-10 tracking-tighter">
+                KESSOKU <span class="text-pink-500">BAND</span>
+            </div>
+            <p class="text-gray-500 text-sm italic">&copy; 2025 Kessoku Fan Culture. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            const links = document.querySelector('.hidden.md\\:flex');
+            links.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
